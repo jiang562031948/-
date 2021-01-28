@@ -1,0 +1,44 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "827664",
+      "name": "手机",
+      "font_class": "shouji",
+      "unicode": "e66f",
+      "unicode_decimal": 58991
+    },
+    {
+      "icon_id": "859415",
+      "name": "闭眼",
+      "font_class": "biyan",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "2668354",
+      "name": "锁子",
+      "font_class": "suozi",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "9223046",
+      "name": "盾牌",
+      "font_class": "dunpai",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "17709608",
+      "name": "用户",
+      "font_class": "yonghu",
+      "unicode": "e7ea",
+      "unicode_decimal": 59370
+    }
+  ]
+}
