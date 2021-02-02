@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div id="banner">
+        <div class="banner2">
+            <ul class="banner-ul1">
+                <li><a href="">所有产品</a></li>
+                <li><a href="">奢雅极</a></li>
+                <li><a href="">新闻</a></li>
+                <li><a href="">品牌故事</a></li>
+            </ul>
+            <img src="img/img1/tb3.png" alt="" class="img3">
+            <ul class="banner-ul2">
+                <li><a href="">查找门店</a></li>
+                <li><a href="">联系我们</a></li>
+                <li><a href="">登录/注册</a></li>
+            </ul>
+            <img src="img/img1/ss2.png" alt="" class="img6">
+            <img src="img/img1/suo(4).png" alt="" class="img7">
+            <span class="span1">0</span>
+        </div>
+
+        <div class="banner3" style="display: none;">
+            <ul class="banner-ul1">
+                <li><a href="">所有产品</a></li>
+                <li><a href="">奢雅极</a></li>
+                <li><a href="">新闻</a></li>
+                <li><a href="">品牌故事</a></li>
+            </ul>
+            <img src="img/img1/xin.png" alt="" class="img8">
+            <ul class="banner-ul2">
+                <li><img src="img/img1/erji.png" alt=""></li>
+                <li><img src="img/img1/ditu.png" alt=""></li>
+                <li><img src="img/img1/txl.png" alt=""></li>
+                <li><img src="img/img1/ss3.png" alt="" class="img9"></li>
+                <li>
+                    <img src="img/img1/suo(4).png" alt="" class="img7">
+                    <span class="span2">0</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="login">
+        <h2>如您已注册，请登录</h2>
+        <p class="p1">账号密码登录</p>
+        <p class="p2">
+            <label for="username">用户名</label>
+            <p>
+                <input type="text" id="username">
+            </p>
+        </p>
+        <p class="p3">
+            <label for="password">密码</label>
+            <p>
+                <input type="password" id="password">
+            </p>
+        </p>
+        <p class="p4">
+            <input type="checkbox" name="" id="mdl">
+            <span>记住我</span>
+        </p>
+        <p class="p5" id="denglu">登录</p>
+        <p class="p6">忘记密码？</p>
+        <p class="p7">使用社交媒体登录</p>
+        <p class="p10">
+            <img src="img/img3/wb.png" alt="">
+            <img src="img/img3/wx.png" alt="">
+            <img src="img/img3/qq.png" alt="">
+        </p>
+        <p class="p8">如您已注册线下会员，可直接短信验证码登录同享线上线下积分等会员权益</p>
+        <p class="p9" id="newuser">创建账户</p>
+
+    </div>
+    <script src="jquery.min.js"></script>
+    <script src="url.js"></script>
+    <script>
+        window.onscroll = function(){
+		    let banner3 = document.querySelectorAll(".banner3")[0]
+            let _top = document.documentElement.scrollTop || document.body.scrollTop;
+            let banner1 = document.querySelectorAll(".banner1")[0]
+		    if(_top > 60){
+                banner3.style.display="block"
+                banner3.style.position = "fixed";
+			    banner3.style.top = 0;
+                }
+            else {
+                banner3.style.top = "60px";
+                banner3.style.display="none"
+		    }
+        }
+        $("#denglu").click(function(){
+            let username = $("#username").val()
+            let password = $("#password").val()
+            // console.log(password)
+            // 如果用户名和密码都输入了，向后端发送ajax请求
+            if(username && password){
+                $.ajax({
+                    url:`${address}/login`,
+                    data:{
+                        username:username,
+                        password:password
+                    },
+                    success(data){
+                        if(data==="0"){
+                            alert("用户名或密码错误")
+                            return
+                        }
+                        else{
+                            let userid = data.id
+                            // alert("3")
+                            // 30天免登陆判断
+                            if($("#mdl")[0].checked){
+                                // 当前时间
+                                let date = new Date()
+                                // 到期时间
+                                date.setDate(date.getDate()+30)
+                                // console.log(data.getDate())
+                                document.cookie=`information=${data};expires=${date}`
+                                
+                            }
+
+                            localStorage.setItem("userid",userid)
+                            localStorage.setItem("username",username)
+                            // console.log(localStorage.getItem("userid"))
+                            // console.log(localStorage.getItem("username"))
+                        }
+                        location.href = `${address}/order.html`
+                    }
+                })
+                // console.log(userid)
+               
+            }
+        })
+        $("#newuser").click(function(){
+            location.href = `${address}/reg.html`
+        })
+    </script>
+</body>
+</html>
